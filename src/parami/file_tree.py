@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def bootstrap_directories(dir: str = None) -> None:
+def bootstrap_directories() -> None:
     """
     Creates the entire directory structure needed to run the program.
 
@@ -12,15 +12,15 @@ def bootstrap_directories(dir: str = None) -> None:
         None: ...
     """
 
-    ROOT_DIR = Path(f"/{dir}") / "parami"
-    OBJECTS_DIR = ROOT_DIR / "objects"
-    ENTRIES_DIR = ROOT_DIR / "objects" / "entries"
-    CONSTRAINTS_DIR = ROOT_DIR / "objects" / "constraints"
-    FILES_DIR = ROOT_DIR / "objects" / "files"
-    DOCS_DIR = ROOT_DIR / "docs"
+    IVENTORY_DIR    = Path(__file__).parent / "inventory"
+    DOCS_DIR        = IVENTORY_DIR / "docs"
+    OBJECTS_DIR     = IVENTORY_DIR / "objects"
+    ENTRIES_DIR     = OBJECTS_DIR / "entries"
+    CONSTRAINTS_DIR = OBJECTS_DIR / "constraints"
+    FILES_DIR       = OBJECTS_DIR / "entries"
 
     for folder in (
-        ROOT_DIR,
+        IVENTORY_DIR,
         OBJECTS_DIR,
         ENTRIES_DIR,
         CONSTRAINTS_DIR,

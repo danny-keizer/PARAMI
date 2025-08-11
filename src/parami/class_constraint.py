@@ -1,5 +1,5 @@
 from parami.file_operations import *
-from parami.bootstrap import *
+from parami.file_tree import *
 from pathlib import Path
 import hashlib
 import pickle

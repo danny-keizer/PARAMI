@@ -1,5 +1,5 @@
 from parami.dispatch import *
-from parami.bootstrap import *
+from parami.file_tree import *
 from parami.class_constraint import *
 from parami.class_entry import *
 from parami.class_operations import *
@@ -178,7 +178,7 @@ def main():
 
 
 if __name__ == "__main__":
-    bootstrap_directories("tmp")
+    bootstrap_directories()
     console = Console()
     os.system("cls||clear")
     main()
