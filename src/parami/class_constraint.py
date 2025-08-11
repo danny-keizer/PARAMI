@@ -73,7 +73,7 @@ class Constraint:
         Return the path of the instance pickle.
         """
 
-        return Path(f"/tmp") / "parami" / "objects" / "constraints" / f"{self.Id}.pkl"
+        return Path(__file__).parent / "inventory" / "objects" / "constraints" / f"{self.Id}.pkl"
 
     def test(self) -> None:
         """

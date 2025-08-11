@@ -60,7 +60,7 @@ class Entry:
         Return the path of the instance pickle.
         """
 
-        return Path(f"/tmp") / "parami" / "objects" / "entries" / f"{self.Id}.pkl"
+        return Path(__file__).parent / "inventory" / "objects" / "entries" / f"{self.Id}.pkl"
 
     def bulk_create_from_json(file: str) -> None:
         """

@@ -6,7 +6,7 @@ def bootstrap_directories() -> None:
     Creates the entire directory structure needed to run the program.
 
     Args:
-        dir (str): The base directory, defaults to /tmp.
+        dir (str): The base directory.
 
     Returns:
         None: ...

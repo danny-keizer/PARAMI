@@ -15,7 +15,7 @@ def load_class_instances_from_dir(subdir: str) -> list:
     """
 
     batch = []
-    items = os.scandir((Path(f"/tmp") / "parami" / "objects" / subdir))
+    items = os.scandir((Path(__file__).parent / "inventory" / "objects" / subdir))
     for item in items:
         if item.is_file():
             with open(item, "rb") as file:
@@ -36,7 +36,7 @@ def load_class_instance_from_file(subdir: str, name: str) -> object:
         list: A single class instance object.
     """
 
-    dir = Path(f"/tmp") / "parami" / "objects" / subdir
+    dir = Path(__file__).parent / "inventory" / "objects" / subdir
     with open(f"{dir}/{name}.pkl", "rb") as file:
         return pickle.load(file)
 

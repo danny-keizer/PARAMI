@@ -46,7 +46,7 @@ def convert_yaml_to_json(infile: str) -> None:
         None: I/O Stream.
     """
     data = yaml.safe_load(read_file(infile))
-    outfile = Path(f"/tmp") / "parami" / "objects" / "files" / infile
+    outfile = Path(__file__).parent / "inventory" / "objects" / "files" / infile
     write_file(filename=outfile, content=json.dumps(data, indent=2))
     return outfile
 
@@ -62,7 +62,7 @@ def convert_xml_to_json(infile: str) -> None:
         None: I/O Stream.
     """
     data = xmltodict.parse(read_file(infile))
-    outfile = Path(f"/tmp") / "parami" / "objects" / "files" / infile
+    outfile = Path(__file__).parent / "inventory" / "objects" / "files" / infile
     write_file(filename=outfile, content=json.dumps(data, indent=2))
     return outfile
 
@@ -78,7 +78,7 @@ def convert_toml_to_json(infile: str) -> None:
         None: I/O Stream.
     """
     data = toml.load(infile)
-    outfile = Path(f"/tmp") / "parami" / "objects" / "files" / infile
+    outfile = Path(__file__).parent / "inventory" / "objects" / "files" / infile
     write_file(filename=outfile, content=json.dumps(data, indent=2))
     return outfile
 
@@ -93,7 +93,7 @@ def convert_tfvars_to_json(infile: str) -> None:
     Returns:
         None: I/O Stream.
     """
-    outfile = Path(f"/tmp") / "parami" / "objects" / "files" / infile
+    outfile = Path(__file__).parent / "inventory" / "objects" / "files" / infile
     with open(infile, "r") as file:
         data = hcl2.load(file)
         write_file(filename=outfile, content=json.dumps(data, indent=2))
