@@ -28,3 +28,5 @@ def bootstrap_directories() -> None:
         DOCS_DIR,
     ):
         folder.mkdir(0o777, parents=True, exist_ok=True)
+
+bootstrap_directories()
