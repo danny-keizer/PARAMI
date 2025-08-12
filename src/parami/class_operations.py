@@ -17,7 +17,7 @@ def load_class_instances_from_dir(subdir: str) -> list:
     batch = []
     items = os.scandir((Path(__file__).parent / "inventory" / "objects" / subdir))
     for item in items:
-        if item.is_file():
+        if item.is_file() and item.name.split(".")[0]:
             with open(item, "rb") as file:
                 batch.append(pickle.load(file))
 

@@ -178,7 +178,7 @@ def main():
 
 
 if __name__ == "__main__":
-    bootstrap_directories()
+    #bootstrap_directories()
     console = Console()
-    os.system("cls||clear")
+    #os.system("cls||clear")
     main()
