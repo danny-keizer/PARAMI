@@ -60,27 +60,27 @@ def query_class_instance(search: str, attribute: str, subdir: str = "entries") -
             match attribute:
 
                 case "id" | "Id":
-                    if search in str(instance.Id) or search in ["all", "All"]:
+                    if search in str(instance.Id) or search in "all":
                         hits.append(instance)
 
                 case "key" | "Key":
-                    if search in str(instance.Key) or search in ["all", "All"]:
+                    if search in str(instance.Key) or search in "all":
                         hits.append(instance)
 
                 case "value" | "Value":
-                    if search in str(instance.Value) or search in ["all", "All"]:
+                    if search in str(instance.Value) or search in "all":
                         hits.append(instance)
 
                 case "operator" | "Operator":
-                    if search in str(instance.Operator) or search in ["all", "All"]:
+                    if search in str(instance.Operator) or search in "all":
                         hits.append(instance)
 
                 case "condition" | "Condition":
-                    if search in str(instance.Condition) or search in ["all", "All"]:
+                    if search in str(instance.Condition) or search in "all":
                         hits.append(instance)
 
                 case "result" | "Result":
-                    if search in str(instance.Result) or search in ["all", "All"]:
+                    if search in str(instance.Result) or search in "all":
                         hits.append(instance)
 
                 case _:
