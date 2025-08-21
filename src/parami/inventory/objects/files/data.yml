@@ -1,0 +1,11 @@
+{
+  "api": {
+    "base_url": "https://api.example.com",
+    "endpoints": {
+      "get_user": "/users/{id}",
+      "list_users": "/users",
+      "create_user": "/users/create",
+      "opcode": "200"
+    }
+  }
+}

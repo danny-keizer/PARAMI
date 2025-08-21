@@ -126,6 +126,7 @@ def parse_create_constraint(
             id=constraint.Id,
             key=constraint.Key,
             value=constraint.Value,
+            type=constraint.Type,
             operator=args_operator,
             condition=args_condition,
         )

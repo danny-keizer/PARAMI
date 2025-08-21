@@ -4,6 +4,7 @@ from pathlib import Path
 import hashlib
 import pickle
 import os
+import re
 
 
 class Constraint:
@@ -28,6 +29,7 @@ class Constraint:
         id: str,
         key: str,
         value: float | int | str,
+        type: str,
         operator: str,
         condition: float | int | str,
         result: bool = None,
@@ -38,7 +40,7 @@ class Constraint:
         self.Id = id + "-" + self.identifier(operator, condition)
         self.Key = key
         self.Value = value
-        self.Type = type(value).__name__
+        self.Type = type
         self.Operator = operator
         self.Condition = condition
         self.Result = result
@@ -80,29 +82,12 @@ class Constraint:
         Tests the constraint and returns the result.
         """
 
-        if type(self.Value) is str and type(self.Condition) is str:
-            self.Result = test_constraint_string(
-                value=self.Value, operator=self.Operator, condition=self.Condition
-            )
+        if self.Type == "str":
+            self.Result = test_constraint_string(value=self.Value, operator=self.Operator, condition=self.Condition)
 
-        elif type(self.Value) is str and type(self.Condition) is int or float:
-            self.Result = test_constraint_string(
-                value=str(self.Value),
-                operator=self.Operator,
-                condition=str(self.Condition),
-            )
 
-        elif type(self.Value) is int or float and type(self.Condition) is str:
-            self.Result = test_constraint_string(
-                value=str(self.Value),
-                operator=self.Operator,
-                condition=str(self.Condition),
-            )
-
-        elif type(self.Value) is int or float and type(self.Condition) is int or float:
-            self.Result = test_constraint_number(
-                value=self.Value, operator=self.Operator, condition=self.Condition
-            )
+        elif self.Type == "num":
+            self.Result = test_constraint_number(value=self.Value, operator=self.Operator, condition=self.Condition)
 
         return self.Result
 
@@ -164,7 +149,7 @@ def greaterequals(x, y) -> bool:
         Bool True or False.
     """
 
-    return x >= y
+    return y >= x
 
 
 def lesserequals(x, y) -> bool:
@@ -179,7 +164,7 @@ def lesserequals(x, y) -> bool:
         Bool True or False.
     """
 
-    return x <= y
+    return y <= x
 
 
 def max(x, y) -> bool:
@@ -210,6 +195,27 @@ def min(x, y) -> bool:
     """
 
     return y < x
+
+
+def regex(digest, pattern):
+    """
+    Check if the given text fully matches the provided regex pattern.
+    
+    Args:
+        digest  (str): The string to check.
+        pattern (str): A regular expression pattern.
+        
+    Returns:
+        Bool True or False or Invalid.
+    """
+
+    pattern = pattern.encode('unicode_escape').decode()
+    try: 
+        re.compile(pattern)
+        return re.fullmatch(pattern, digest) is not None
+
+    except re.error: 
+        return "Invalid"
 
 
 def test_constraint_string(value: str, operator: str, condition: str) -> bool:
@@ -254,6 +260,9 @@ def test_constraint_string(value: str, operator: str, condition: str) -> bool:
         case "isnt" | "not":
             return notequals(value, condition)
 
+        case "regex":
+            return regex(digest=value, pattern=condition)
+
         case _:
             return "Invalid"
 
@@ -277,7 +286,7 @@ def test_constraint_number(
         case "equals" | "eq" | "is" | "==":
             return equals(value, condition)
 
-        case "notequals" | "ne" | "isnt" "!=":
+        case "notequals" | "ne" | "not" "!=":
             return notequals(value, condition)
 
         case "greaterequals" | "ge" | ">=":

@@ -30,6 +30,7 @@ class Entry:
         self.Id = self.identifier(key, value)
         self.Key = key
         self.Value = value
+        self.Type = self.typecast(value)
         self.save()
 
     def save(self) -> None:
@@ -77,3 +78,14 @@ class Entry:
         """
 
         return hashlib.md5(f"{x}:{y}".encode("utf-8")).hexdigest()
+    
+
+    @staticmethod
+    def typecast(value):
+        if isinstance(value, bool):
+            return "str"
+        try:
+            float(value)
+            return "num"
+        except (ValueError, TypeError):
+            return "str"
